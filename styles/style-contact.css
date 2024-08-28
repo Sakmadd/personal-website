@@ -1,14 +1,101 @@
 *{
-  font-family: "Open sans", Helvetica, Arial, sans-serif;
-}
-body {
-    background-color: #f4f4f4;
+    margin: 0;
+    font-family: "Open sans", Helvetica, Arial, sans-serif;
+  }
+  :root {
+    --main-text-color: rgb(58, 58, 58);
+    --secondary-text-color: rgb(92, 92, 92);
+    --hover-text-color: rgb(165, 52, 52);
+  }
+  
+  .bacground-header{
+    background-image: url(../asets/background.jpg);
+    height: 55vh;
+    background-position: 0 -320px;
+    filter: grayscale(1) opacity(.2);
+  }
+  .profile-header{
+    position: absolute;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+
+  }
+  .profile-header img{
+    box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.1);
+    border-radius: 150px;
+    width: 150px;
+    filter: grayscale(0) opacity(1);
+  }
+  .profile-header h2 {
+    color: var(--main-text-color);
+    letter-spacing: 3px;
+    padding-top: 20px;
+    font-size: 50px;
+  }
+  .profile-header p{
+    font-size: 20px;
+    font-weight: 100;
+  }
+  nav{
+    text-align: center;
+    padding: 1em;
+    border: 1px solid rgba(92, 92, 92,.4);
+    border-left: 0;
+    border-right: 0;
+  
+  }
+  nav h2{
+    padding-bottom: 20px;
+  }
+  
+  .navigation{
+    padding: 0;
+    list-style-type: none;
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 10%;
+  }
+  .navigation a{
+    font-weight: 100;
+    font-size: 1em;
+    text-decoration: none;
+    color: var(--main-text-color);
+    transition: 500ms;
+  }
+  .navigation a:hover{
+    letter-spacing: 5px;
+    color: var(--hover-text-color);
+  }
+  main {
+    margin: auto;
+    max-width: 65em;
+  }
+  .self-description{
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: 100;
+    padding-top: 60px;
+    text-align: center;
+    color: var(--secondary-text-color);
+  }
+  .self-social{
+    gap: 50px;
+    transform: scale(0.3);
+    display: flex;
+    justify-content: center;
+  }
+  .another {
     height: 100vh;
-    margin: 0;
-}
+  }
+  
+  
+  
+  
+  
+  
 
 .contact-form {
     background-color: #fff;
@@ -40,6 +127,8 @@ body {
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
+.contact-form input[type="number"],
+.contact-form input[type="subject"],
 .contact-form textarea {
     width: 100%;
     padding: 10px;
@@ -73,4 +162,9 @@ body {
 
 .contact-form button:not(:disabled) {
     background-color: #8B0000; /* Dark red color */
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
