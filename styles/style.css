@@ -9,7 +9,7 @@
 }
 
 .bacground-header{
-  background-image: url(../asets/background.jpg);
+  background-image: url(../assets/background.jpg);
   height: 55vh;
   background-position: 0 -320px;
   filter: grayscale(1) opacity(.2);
@@ -68,9 +68,25 @@ nav h2{
   letter-spacing: 5px;
   color: var(--hover-text-color);
 }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: white;
+}
+.sticky + main {
+  padding-top: 60px;
+}
+
 main {
   margin: auto;
   max-width: 65em;
+}
+.self h3 {
+  padding-top: 80px;
+  text-align: center;
 }
 .self-description{
   letter-spacing: 1px;
@@ -81,13 +97,23 @@ main {
   color: var(--secondary-text-color);
 }
 .self-social{
-  gap: 50px;
-  transform: scale(0.3);
+  padding-top: 10px;
+  width: 100%;
+  gap: 10px;
   display: flex;
   justify-content: center;
 }
 .another {
   height: 100vh;
+}
+.icon--sm {
+  height: 30px;
+  width: 30px;
+}
+
+.icon--md {
+  height: 32px;
+  width: 32px
 }
 
 

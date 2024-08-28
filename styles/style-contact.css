@@ -9,7 +9,7 @@
   }
   
   .bacground-header{
-    background-image: url(../asets/background.jpg);
+    background-image: url(../assets/background.jpg);
     height: 55vh;
     background-position: 0 -320px;
     filter: grayscale(1) opacity(.2);
