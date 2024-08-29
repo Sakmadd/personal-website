@@ -14,31 +14,6 @@
     background-position: 0 -320px;
     filter: grayscale(1) opacity(.2);
   }
-  .profile-header{
-    position: absolute;
-    width: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-
-  }
-  .profile-header img{
-    box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.1);
-    border-radius: 150px;
-    width: 150px;
-    filter: grayscale(0) opacity(1);
-  }
-  .profile-header h2 {
-    color: var(--main-text-color);
-    letter-spacing: 3px;
-    padding-top: 20px;
-    font-size: 50px;
-  }
-  .profile-header p{
-    font-size: 20px;
-    font-weight: 100;
-  }
   nav{
     text-align: center;
     padding: 1em;
@@ -69,28 +44,6 @@
     letter-spacing: 5px;
     color: var(--hover-text-color);
   }
-  main {
-    margin: auto;
-    max-width: 65em;
-  }
-  .self-description{
-    letter-spacing: 1px;
-    font-size: 20px;
-    font-weight: 100;
-    padding-top: 60px;
-    text-align: center;
-    color: var(--secondary-text-color);
-  }
-  .self-social{
-    gap: 50px;
-    transform: scale(0.3);
-    display: flex;
-    justify-content: center;
-  }
-  .another {
-    height: 100vh;
-  }
-  
   
   
   
@@ -98,12 +51,16 @@
   
 
 .contact-form {
+    position: absolute;
     background-color: #fff;
-    padding: 20px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
 }
 
 .contact-form h2 {
@@ -168,3 +125,70 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.space {
+  height: 50vh;
+}
+.icon--sm {
+  fill: rgb(211, 211, 211);
+  height: 30px;
+  width: 30px;
+}
+#first-footer {
+  background: #232323;
+  padding: 30px 0 0 0;
+  font-size: 12px;
+  color: #999;
+}
+#first-footer a {
+  color: #ccc;
+}
+#first-footer a:hover {
+  color: #fff;
+}
+#first-footer h3.widget-title {
+  font-size: 15px;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  color: #ccc;
+  margin: 0 0 20px;
+}
+#second-footer {
+  background: #191919;
+  padding: 15px 0;
+  color: #777;
+  font-size: 12px;
+}
+#second-footer a {
+  color: #aaa;
+}
+#second-footer a:hover {
+  color: #fff;
+}
+#second-footer p {
+  margin: 0;
+}
+.follow-me-icons {
+  font-size: 30px;
+}
+.follow-me-icons i {
+  float: left;
+  margin: 0 10px 0 0;
+}
+.footer-upper {
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.footer-section{
+  padding: 0 20px;
+  max-width: 250px;
+}
+.under-footer{
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+
+

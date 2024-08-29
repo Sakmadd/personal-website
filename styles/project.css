@@ -79,43 +79,36 @@ nav h2{
 .sticky + main {
   padding-top: 60px;
 }
-
 main {
-  margin: auto;
-  max-width: 65em;
+   max-width: 100vh;
+   margin: auto;
+   text-align: center;
 }
-.self h3 {
+.project{
+  padding: 1em;
+}
+.project h4{
   padding-top: 80px;
-  text-align: center;
-}
-.self-description{
-  letter-spacing: 1px;
-  font-size: 20px;
-  font-weight: 100;
-  padding-top: 60px;
-  text-align: center;
+  font-weight: bold;
+  font-style: oblique;
   color: var(--secondary-text-color);
 }
-.self-social{
-  padding-top: 10px;
+.project h2 {
+  font-weight: 100;
+  font-size: 40px;
+  color: var(--main-text-color);
+}
+.project img {
+  padding: 30px 0;
   width: 100%;
-  gap: 10px;
-  display: flex;
-  justify-content: center;
+  height: auto;
+  border-radius: 20px;
 }
-.another {
-  height: 100vh;
-}
-.icon--sm {
-  fill: rgb(211, 211, 211);
-  height: 30px;
-  width: 30px;
+.project p {
+  font-weight: 100;
+  text-align: justify;
 }
 
-.icon--md {
-  height: 32px;
-  width: 32px
-}
 #first-footer {
   background: #232323;
   padding: 30px 0 0 0;
@@ -172,5 +165,6 @@ main {
   justify-content: center;
   gap: 50px;
 }
+
 
 
