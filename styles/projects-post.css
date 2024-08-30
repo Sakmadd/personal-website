@@ -168,6 +168,14 @@ nav h2{
   justify-content: end;
   gap: 10px;
   padding-top: 20px;
+  
+}
+.project-buttons svg {
+  transition: all 400ms;
+}
+
+.project-buttons svg:hover {
+  fill: var(--secondary-text-color);
 }
 
 .project-buttons .edit-button,
@@ -291,6 +299,9 @@ nav h2{
   height: 32px;
   width: 32px
 }
+
+
+
 .icon--sm {
   fill: rgb(211, 211, 211);
   height: 30px;
