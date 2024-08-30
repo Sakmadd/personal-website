@@ -15,6 +15,11 @@ const dataChecker = (data) => {
   if(data.message == ''){
     return alert('message must be filled')
   }else {
+
+    const recipient = 'ahmadsafii.work@gmail.com'
+    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`${data.message}`)}`;
+    window.location.href = mailtoLink;
+
     return alert(`
     Name : ${data.name}
     Email : ${data.email}
@@ -27,9 +32,8 @@ const dataChecker = (data) => {
   }
 }
 
-const submitEvent = () => {
+const submitEvent = (event) => {
   event.preventDefault()
-  const recipient = 'ahmadsafii.work@gmail.com'
   const data = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
@@ -39,8 +43,7 @@ const submitEvent = () => {
   }
   console.log(data)
   dataChecker(data)
-  const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`${data.message}`)}`;
-  window.location.href = mailtoLink;
+  
 }
 
 const button = document.getElementById('submit-button')
