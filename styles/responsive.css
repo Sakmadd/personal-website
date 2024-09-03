@@ -1,0 +1,116 @@
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .project-card {
+    max-height: 250px;
+
+  }
+  .project-card h3 {
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+            line-clamp: 1; 
+    -webkit-box-orient: vertical;
+  }
+  .project-card p {
+    font-size: 10px;
+
+  }
+  .project-card svg {
+    height: 20px;
+    width: 20px;
+  }
+  /* .project-buttons {
+    padding: 10px;
+  } */
+}
+
+@media (max-width: 767px) {
+    .profile-header img{
+      width: 120px;
+    }
+    .profile-header h2 {
+      font-size: 40px;
+    }
+  .footer-section:nth-child(3) {
+    display: block;
+  }
+  .footer-upper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+  }
+  .under-footer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .self-description {
+    padding-top: 30px;
+    font-size: 15px;
+  }
+  .navigation {
+    font-size: 14px;
+  }
+  .contact-form {
+    max-width: 50%;
+  }
+  .checkbox-group {
+    flex-direction: column;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="date"],
+  .form-group textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+  .form-group-inline{
+    flex-direction: column;
+  }
+
+
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .footer-section:nth-child(3) {
+    display: none;
+  }
+
+  .self-description {
+    padding-top: 30px;
+    font-size: 18px;
+  }
+  .navigation {
+    font-size: 14px;
+  }
+  .contact-form {
+    max-width: 50%;
+  }
+
+  
+}
+
+/* Desktops and Larger Devices */
+@media (min-width: 1025px) {
+  .form-container {
+    max-width: 35%;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="date"],
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+}
