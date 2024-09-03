@@ -12,7 +12,10 @@ main {
   max-width: 55%;
 }
 
-
+.page-title {
+  padding: 60px;
+  text-align: center;
+}
 .bacground-header{
   background-image: url(../assets/background.jpg);
   height: 55vh;
@@ -32,7 +35,6 @@ main {
   box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.1);
   border-radius: 150px;
   width: 150px;
-  filter: grayscale(0) opacity(1);
 }
 .profile-header h2 {
   color: var(--main-text-color);
@@ -59,8 +61,6 @@ nav{
 nav h2{
   padding-bottom: 20px;
 }
-
-
 
 .navigation{
   padding: 0;
@@ -91,6 +91,22 @@ nav h2{
 .sticky + main {
   padding-top: 60px;
 }
+.nav-arrow {
+  margin: auto;
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  display: none;
+  transition: all 500ms;
+}
+.nav-arrow svg {
+  height: 30px;
+  width: 30px;
+}
 
 
 
@@ -117,7 +133,7 @@ nav h2{
   height: 100vh;
 }
 
-/* RESPONSIVE */
+
 
 
 
