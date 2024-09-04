@@ -1,3 +1,44 @@
+.rating-buttons button.active {
+  background-color: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+.rating-filter {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.rating-filter h2 {
+  margin-bottom: 20px;
+  font-size: 1em;
+  color: #333;
+}
+
+.rating-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rating-buttons button {
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.rating-buttons button:hover {
+  background-color: #333;
+  color: #fff;
+}
 .testimonial-container {
   display: flex;
   flex-wrap: wrap;

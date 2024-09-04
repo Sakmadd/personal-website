@@ -90,3 +90,4 @@ const submitEvent = (event) => {
 
 const form = document.getElementById('form-project');
 form.addEventListener('submit', submitEvent);
+

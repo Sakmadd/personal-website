@@ -1,5 +1,8 @@
 /* Mobile Devices */
 @media (max-width: 480px) {
+  .rating-buttons button {
+    font-size: 5px;
+  }
   main {
     max-width: 90%;
   } 
