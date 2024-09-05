@@ -1,77 +1,65 @@
-
 class Testimony {
-  constructor(image, ratings, description, name) {
+  constructor(image, rating, description, name) {
       this.image = image;
-      this.ratings = this.convertRatings(ratings);
+      this.ratings = this.convertRatings(rating);
       this.description = description;
       this.name = name;
   }
+
   getHtml() {
       return `
       <div class="testimonial-card">
           <div class="testimonial-card__image">
               <img src="${this.image}" alt="customer">
           </div>
-          <p class="testimonial-card__ratings" star="${this.ratings}">${this.ratings}</p>
+          <p class="testimonial-card__ratings" star="${this.ratings.length}">${this.ratings}</p>
           <p class="testimonial-card__description">${this.description}</p>
           <h2 class="testimonial-card__customer-name">${this.name}</h2>
       </div>
       `;
   }
 
-  convertRatings(ratings) {
-      if (ratings < 1 || ratings > 5) {
+  convertRatings(rating) {
+      if (rating < 1 || rating > 5) {
           return "no rating";
       }
-      return '⭐'.repeat(ratings);
+      return '⭐'.repeat(rating);
   }
 }
 
-const testimonial1 = new Testimony(
-  "/assets/profile1.jpeg",
-  5,
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Rizki Anwar"
-);
-const testimonial2 = new Testimony(
-  "/assets/profile2.jpeg",
-  1,
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Rahma Dewi"
-);
-const testimonial3 = new Testimony(
-  "/assets/profile3.jpeg",
-  3,
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Raju Kareem"
-);
-const testimonial4= new Testimony(
-  "/assets/profile2.jpeg",
-  2,
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Rahma Dewi"
-);
-const testimonial5 = new Testimony(
-  "/assets/profile1.jpeg",
-  4,
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Rizki Anwar"
-);
+async function fetchTestimonials() {
+  try {
+      const response = await fetch('https://api.npoint.io/ef4a1292c6548975904a');
+      const data = await response.json();
 
-const testimonials = [testimonial1, testimonial2, testimonial3,testimonial4,testimonial5];
+      console.log('Fetched data:', data);
+
+      return data.map(item => new Testimony(item.image, item.rating, item.description, item.name));
+  } catch (error) {
+      console.error('Error fetching testimonials:', error);
+      return [];
+  }
+}
+
 function createRatingFilter(rating) {
   return function(testimonial) {
       if (rating === 'all') {
           return true;
       }
-      const starRating = testimonial.querySelector('.testimonial-card__ratings').getAttribute('star').length;
-      return starRating === parseInt(rating);
+      const starRating = testimonial.querySelector('.testimonial-card__ratings').getAttribute('star');
+      return parseInt(starRating) === parseInt(rating);
   };
 }
 
-function renderTestimonials(filterFunction) {
+function renderTestimonials(filterFunction, testimonials) {
   const container = document.querySelector('.testimonial-container');
-  container.innerHTML = ''; // Clear previous content
+
+  if (!container) {
+      console.error('Container element not found!');
+      return;
+  }
+
+  container.innerHTML = ''; 
   testimonials.forEach(testimonial => {
       const testimonialHtml = document.createElement('div');
       testimonialHtml.innerHTML = testimonial.getHtml();
@@ -82,7 +70,7 @@ function renderTestimonials(filterFunction) {
 }
 
 document.querySelectorAll('.rating-buttons button').forEach(button => {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', async function() {
       document.querySelectorAll('.rating-buttons button').forEach(btn => {
           btn.classList.remove('active');
       });
@@ -90,10 +78,16 @@ document.querySelectorAll('.rating-buttons button').forEach(button => {
       this.classList.add('active');
 
       const rating = this.getAttribute('data-rating');
+      const testimonials = await fetchTestimonials();
       const filterFunction = createRatingFilter(rating);
-      renderTestimonials(filterFunction);
+      renderTestimonials(filterFunction, testimonials);
   });
 });
 
-document.querySelector('.rating-buttons button[data-rating="all"]').classList.add('active');
-renderTestimonials(() => true);
+async function init() {
+  const testimonials = await fetchTestimonials();
+  document.querySelector('.rating-buttons button[data-rating="all"]').classList.add('active');
+  renderTestimonials(() => true, testimonials);
+}
+
+init();
