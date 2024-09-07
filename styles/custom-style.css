@@ -16,7 +16,11 @@ main {
 
 
 /* CUSTOM HEADER */
+.main-title {
+  padding-top: 50px;
+  text-align: center;
 
+}
 
 .page-title {
   padding: 60px;
