@@ -1,33 +1,38 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000; 
+const port = 3000;
+const hbs = require('hbs');
 
 // Middleware untuk menyajikan file statis dari folder tertentu
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/script', express.static(path.join(__dirname, 'script')));
-app.use('/styles', express.static(path.join(__dirname, 'styles')));
-app.use(express.static(path.join(__dirname, 'pages'))); // Menyajikan file HTML dari folder 'pages'
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+
+// Mengatur view engine menjadi hbs
+app.set('view engine', 'hbs');
+
+// Mengatur direktori views
+app.set('views', path.join(__dirname, 'views'));
 
 // Rute untuk file HTML
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/index.html'));
+  res.render('index');
 });
 
 app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/index.html'));
+  res.render('index');
 });
 
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/contact.html'));
+  res.render('contact');
 });
 
 app.get('/projects', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/projects.html'));
+  res.render('add-projects');
 });
 
 app.get('/testimonial', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages/testimonial.html'));
+  res.render('testimonial');
 });
 
 app.listen(port, () => {

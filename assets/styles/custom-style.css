@@ -27,7 +27,7 @@ main {
   text-align: center;
 }
 .bacground-header{
-  background-image: url(../assets/background.jpg);
+  background-image: url(../images/background.jpg);
   height: 55vh;
   background-position: 0 -320px;
   filter: grayscale(1) opacity(.2);
