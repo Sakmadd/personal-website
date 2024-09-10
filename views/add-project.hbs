@@ -16,32 +16,32 @@
      <div class="form">
         <div class="form-container">
         <h2>ADD PROJECT</h2>
-        <form id="form-project">
+        <form method="post" onsubmit="'/add-project" id="form-project">
         <div class="form-group">
         <label for="project-name">Project Name</label>
-        <input id="project-name" type="text" placeholder="Enter project name" required>
+        <input name="name" type="text" placeholder="Enter project name" required>
         </div>
         <div class="form-group-inline">
         <div class="form-group">
         <label for="start-date">Start Date</label>
-        <input id="start-date" type="date" required>
+        <input name="startDate" type="date" required>
         </div>
         <div class="form-group">
         <label for="end-date">End Date</label>
-        <input id="end-date" type="date" required>
+        <input name="endDate" type="date" required>
         </div>
         </div>
         <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" rows="4" placeholder="Enter project description" required></textarea>
+        <textarea name="description" rows="4" placeholder="Enter project description" required></textarea>
         </div>
         <div class="form-group">
         <label>Technologies</label>
         <div class="checkbox-group">
-        <label><input type="checkbox" value="Node.js"> Node Js</label>
-        <label><input type="checkbox" value="Next.js"> Next Js</label>
-        <label><input type="checkbox" value="React.js"> React Js</label>
-        <label><input type="checkbox" value="TypeScript"> TypeScript</label>
+        <label><input type="checkbox" name="technologies" value="Node.js"> Node Js</label>
+        <label><input type="checkbox" name="technologies" value="Next.js"> Next Js</label>
+        <label><input type="checkbox" name="technologies" value="React.js"> React Js</label>
+        <label><input type="checkbox" name="technologies" value="TypeScript"> TypeScript</label>
         </div>
         </div>
         <div class="form-group">
@@ -49,10 +49,10 @@
         <p>Upload Image</p>
         </label>
         <div class="upload-button">
-        <input id="upload-image" type="file" accept="image/*" required>
+        <input name="uploadImage" type="file" accept="image/*" required>
         </div>
         </div>
-        <button type="submit" id="submit-button" class="submit-button">Submit</button>
+        <button type="submit" name="submit-button" class="submit-button">Submit</button>
         </form>
         </div>
         </div>
