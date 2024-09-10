@@ -443,6 +443,27 @@ height: 100vh;
 }
 
 
+/* DETAIL PROJECT */
+.detail-project {
+  padding: 100px;
+  text-align: center;
+}
+.detail-project img {
+  border-radius: 50px;
+  padding: 20px;
+  width: 600px;
+  height: 100%;
+}
+.detail-project h4 {
+  padding: 10px;
+}
+.detail-project p {
+  padding: 30px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  color: black;
+}
+
 
 /* TESTIMONIALS */
 

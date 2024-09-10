@@ -15,11 +15,11 @@
 
      <div class="form">
         <div class="form-container">
-          <h2>ADD PROJECT</h2>
-          <form name="form-project" method="post" action="/add-project">
+          <h2>Edit Project</h2>
+          <form name="form-project" method="post" action="/edit-project/{{project.id}}">
             <div class="form-group">
               <label>Project Name</label>
-              <input name="title" type="text" placeholder="Enter project name" required>
+              <input name="title" type="text" placeholder="Enter project name" value="{{project.title}}" required>
             </div>
             <div class="form-group-inline">
               <div class="form-group">
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
               <label>Description</label>
-              <textarea name="description" rows="4" placeholder="Enter project description" required></textarea>
+              <textarea name="description" rows="4" placeholder="Enter project description" required>{{project.description}}</textarea>
             </div>
             <div class="form-group">
               <label>Technologies</label>
@@ -52,7 +52,7 @@
               <input name="uploadImage" type="file" accept="image/*" required>
                 </div>
             </div>
-            <button type="submit" name="submit-button" class="submit-button" >Submit</button>
+            <button type="submit" name="submit-button" class="submit-button" >Confirm</button>
             </form>
           </div>
         </div>
