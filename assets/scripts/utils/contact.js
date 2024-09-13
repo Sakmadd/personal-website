@@ -1,3 +1,4 @@
+
 const dataChecker = (data) => {
   if(data.name == ''){
     return alert('name must be filled')

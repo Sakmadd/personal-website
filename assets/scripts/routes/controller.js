@@ -1,14 +1,25 @@
 const { PrismaClient } = require('@prisma/client')
 const { calculateProjectDuration } = require('../utils/utils')
+const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient()
-let dataProjects = []
+
 async function home(req, res) {
+  const user = req.session.user
   const dataProjects = await prisma.project.findMany({})
-  res.render('index', { dataProjects });
+  const duration = calculateProjectDuration(dataProjects[0].start_date, dataProjects[0].end_date)
+
+  dataProjects[0].duration = duration
+
+  res.render('index', { 
+    dataProjects, 
+    user
+   });
+   
 }
 function contact(req, res) {
-  res.render('contact');
+  const user = req.session.user
+  res.render('contact',{user});
 }
 async function addProjectPost(req, res) {
   const { title, start_date, end_date, description, technologies} = req.body;
@@ -27,8 +38,9 @@ async function addProjectPost(req, res) {
 
   res.redirect('/home');
 }
-function testimonial(req, res) {
-  res.render('testimonial');
+function testimonialView(req, res) {
+  const user = req.session.user
+  res.render('testimonial',{user});
 }
 function addProjectView(req, res) {
   res.render('add-project');
@@ -78,16 +90,91 @@ async function deleteProject(req, res) {
 }
 async function detailProject(req, res) {
   const id = parseInt(req.params.id, 10);
-  const project = await prisma.project.findUnique({
-    where: {
-      id 
-    }
-  })
-  if (project) {
-    res.render('detail-project', { project });
+  const dataProject = await prisma.project.findUnique({where: {id}})
+  const duration = calculateProjectDuration(dataProject.start_date, dataProject.end_date)
+  dataProject.duration = duration  
+  if (dataProject) {
+    res.render('detail-project', { project : dataProject });
   } else {
     res.status(404).send('Project not found');
   }
 }
+function registerView(req,res) {
+  res.render('register')
+}
+async function registerPost(req,res) {
+  try{
+    const { name, email, password } = req.body
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password,saltRounds)
 
-module.exports = { home, contact, addProjectPost, testimonial, addProjectView, editProjectView, editProject, deleteProject, detailProject }
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword
+      }
+    })
+    req.flash("success", "Yeay!, you successfully registered 🙌")
+    res.redirect('/login')
+  } catch {
+    req.flash("error", "Sorry, this email has been registered! 😣");
+    res.redirect("/register")
+  } 
+
+}
+function loginView(req,res) {
+  const user = req.session.user
+  res.render('login',{user})
+}
+async function loginPost(req,res) {
+  try {
+    const { email, password } = req.body
+    const user = await prisma.user.findUnique({where: {email}})
+
+    if (!user) {
+      req.flash('error', 'Wait!, your email or password is not right ! 🤔');
+      return res.redirect("/login");
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (isValidPassword) {
+      req.flash('error', 'Wait!, your email or password is not right2! 🤔');
+      return res.redirect("/login");
+    }
+
+    req.session.user = user;  
+
+    res.redirect('/login')
+
+  }catch {
+    req.flash("error", "something went wrong i can feel it! 😞");
+    res.redirect("/");
+  }
+}
+function logout(req,res) {
+  req.session.destroy(err => {
+    if (err) {
+        return res.status(500).send('Failed to destroy session.');
+    }
+    res.redirect('/login'); 
+});
+}
+
+module.exports = { 
+  home, 
+  contact, 
+  addProjectPost, 
+  testimonialView, 
+  addProjectView, 
+  editProjectView, 
+  editProject, 
+  deleteProject, 
+  detailProject , 
+  loginPost, 
+  loginView, 
+  registerPost, 
+  registerView, 
+  logout
+}

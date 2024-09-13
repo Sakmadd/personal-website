@@ -10,6 +10,9 @@ const routes = {
   editProjectView: '/edit-project/:id',
   detailProject: '/detail-project/:id',
   deleteProject: '/delete-project/:id',
+  login: '/login',
+  register: '/register',
+  logout: '/logout'
 
 }
 

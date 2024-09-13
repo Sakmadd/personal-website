@@ -234,6 +234,7 @@ height: 100vh;
 
 
 .project {
+  text-align: center;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -638,7 +639,150 @@ height: 100vh;
 }
 
 
+/* LOGIN */
 
+.auth-form {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 30%;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px 40px;
+}
+
+
+.auth-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 40px;
+  text-align: center;
+}
+.auth-form h4 {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.auth-form .form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-form input[type="name"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.auth-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #fff;
+  box-sizing: border-box;
+}
+.auth-form button:active {
+  background-color: #828282;
+}
+.auth-form button:disabled {
+  background-color: #333;
+}
+
+.auth-form button:not(:disabled) {
+  background-color: #000;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.space {
+height: 100vh;
+}
+
+.auth-form p {
+  text-align: center;
+}
+.auth-form a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--main-text-color);
+}
+
+.popup {
+  margin: 20px;
+  left: 50%; 
+  width: 400px; 
+  margin-left: -200px;
+  position: fixed;
+  z-index: 999999;
+  transition: opacity 1s ease-out, transform 1.5s ease-out;
+}
+
+.popup-hidden {
+    opacity: 0;
+    transform: translateY(-150px);
+
+}
+
+
+
+
+
+.log-button {
+  overflow: hidden;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #dddddd ;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 200ms;
+}
+.log-button svg {
+  display: block;
+
+}
+
+.log-button:hover {
+  height: 70px;
+  width: 70px;
+  background-color: #969696;
+}
 /* RESPONSIVE */
 
 

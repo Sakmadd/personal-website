@@ -23,3 +23,13 @@ model Project {
 
   @@index([title]) 
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  email String @db.VarChar(255) @unique
+  password String @db.VarChar(255)
+  created_at DateTime @default(now())
+  
+  @@index([name])
+}
