@@ -1,21 +1,23 @@
 const { PrismaClient } = require('@prisma/client')
-const { calculateProjectDuration } = require('../utils/utils')
+const { calculateProjectDuration, capitalizedWords } = require('../utils/utils')
 const bcrypt = require('bcrypt');
 
 const prisma = new PrismaClient()
 
 async function home(req, res) {
+ try {
   const user = req.session.user
   const dataProjects = await prisma.project.findMany({})
   const duration = calculateProjectDuration(dataProjects[0].start_date, dataProjects[0].end_date)
 
   dataProjects[0].duration = duration
-
   res.render('index', { 
     dataProjects, 
     user
-   });
-   
+  });
+ } catch (err) {
+  
+ }
 }
 function contact(req, res) {
   const user = req.session.user
@@ -43,7 +45,8 @@ function testimonialView(req, res) {
   res.render('testimonial',{user});
 }
 function addProjectView(req, res) {
-  res.render('add-project');
+  const user = req.session.user
+  res.render('add-project', { user });
 }
 async function editProjectView(req, res) {
   const id = parseInt(req.params.id, 10);
@@ -125,6 +128,11 @@ async function registerPost(req,res) {
 }
 function loginView(req,res) {
   const user = req.session.user
+  if (user) {
+    const newName = capitalizedWords(user.name)
+    user.name = newName
+  }
+
   res.render('login',{user})
 }
 async function loginPost(req,res) {
@@ -146,7 +154,9 @@ async function loginPost(req,res) {
 
     req.session.user = user;  
 
+    req.flash('success', 'Youre successfully logged in! 🙌')
     res.redirect('/login')
+
 
   }catch {
     req.flash("error", "something went wrong i can feel it! 😞");
