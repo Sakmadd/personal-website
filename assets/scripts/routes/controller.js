@@ -8,15 +8,15 @@ async function home(req, res) {
  try {
   const user = req.session.user
   const dataProjects = await prisma.project.findMany({})
-  const duration = calculateProjectDuration(dataProjects[0].start_date, dataProjects[0].end_date)
-
-  dataProjects[0].duration = duration
+  dataProjects.forEach(project => {
+    const duration = calculateProjectDuration(project.start_date, project.end_date)
+    project.duration = duration 
+  })
   res.render('index', { 
     dataProjects, 
     user
   });
  } catch (err) {
-  
  }
 }
 function contact(req, res) {
@@ -61,24 +61,41 @@ async function editProjectView(req, res) {
     res.status(404).send('Project not found');
   }
 }
-function editProject(req, res) {
-  const { title, startDate, endDate, description, checkbox } = req.body;
+async function editProjectPost(req, res) {
+  const { title, start_date, end_date, description, technologies } = req.body;
   const id = parseInt(req.params.id, 10);
-  const index = dataProjects.findIndex(project => project.id === id);
 
-  if (index !== -1) {
-    const updatedProject = {
-      ...dataProjects[index], 
-      title,
-      duration: calculateProjectDuration(startDate, endDate),
-      description,
-      checkbox
-    };
+  if (isNaN(id)) {
+    return res.status(400).json({ error: 'Invalid project ID' });
+  }
 
-    dataProjects[index] = updatedProject;
-    res.redirect('/home');
-  } else {
-    res.status(404).send('Project not found');
+  console.log('Updating project ID:', id);
+  console.log('Update data:', { title, start_date, end_date, description, technologies, image: '/assets/images/project1.jpg' });
+
+  try {
+    const project = await prisma.project.findUnique({ where: { id } });
+
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    const updatedProject = await prisma.project.update({
+      where: { id },
+      data: {
+        title,
+        start_date,
+        end_date,
+        description,
+        technologies,
+        image: '/assets/images/project1.jpg',
+      },
+    });
+
+    console.log('Updated project:', updatedProject);
+    res.redirect('/home')
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 async function deleteProject(req, res) {
@@ -179,7 +196,7 @@ module.exports = {
   testimonialView, 
   addProjectView, 
   editProjectView, 
-  editProject, 
+  editProjectPost, 
   deleteProject, 
   detailProject , 
   loginPost, 

@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 const hbs = require('hbs');
 const routes = require('./assets/scripts/routes/routes')
-const { home, contact, addProjectView, detailProject, addProjectPost, deleteProject, editProjectView, editProject, registerPost, loginView, loginPost, registerView, testimonialView, logout } = require('./assets/scripts/routes/controller')
+const { home, contact, addProjectView, detailProject, addProjectPost, deleteProject, editProjectView, editProject, registerPost, loginView, loginPost, registerView, testimonialView, logout, editProjectPost } = require('./assets/scripts/routes/controller')
 const session = require("express-session");
 const flash = require('express-flash')
 
@@ -17,6 +17,9 @@ app.use(express.json());
 app.use(flash())
 hbs.registerHelper('not', function(value) {
   return !value;
+});
+hbs.registerHelper('includes', function (array, value) {
+  return array.includes(value);
 });
 app.use(
   session({
@@ -38,11 +41,11 @@ app.get(routes.testimonial, testimonialView);
 app.get(routes.detailProject, detailProject)
 app.get(routes.deleteProject, deleteProject);
 app.get(routes.addProjectView, addProjectView);
-app.get(routes.editProjectView, editProjectView);
+app.get(routes.editProject, editProjectView);
 app.get(routes.login, loginView)
 app.get(routes.register, registerView)
 app.post(routes.addProjectPost, addProjectPost);  
-app.post(routes.editProjectPost, editProject);
+app.post(routes.editProject, editProjectPost);
 app.post(routes.login, loginPost)
 app.post(routes.register, registerPost)
 app.post(routes.logout, logout)

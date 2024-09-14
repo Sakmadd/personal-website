@@ -13,10 +13,10 @@
      {{> header}}
 
      {{> navbar}}
-
+     
      <div class="form">
         <div class="form-container">
-          <h2>Edit Project</h2>
+          <h2>ADD PROJECT</h2>
           <form name="form-project" method="post" action="/edit-project/{{project.id}}">
             <div class="form-group">
               <label>Project Name</label>
@@ -25,11 +25,11 @@
             <div class="form-group-inline">
               <div class="form-group">
                 <label>Start Date</label>
-                <input name="startDate" type="date" required>
+                <input name="start_date" type="date" required>
                 </div>
                 <div class="form-group">
                 <label>End Date</label>
-                <input name="endDate" type="date" required>
+                <input name="end_date" type="date" required>
             </div>
             </div>
             <div class="form-group">
@@ -39,10 +39,10 @@
             <div class="form-group">
               <label>Technologies</label>
               <div class="checkbox-group">
-                <label><input type="checkbox" name="checkbox" value="Node.js"> Node Js</label>
-                <label><input type="checkbox" name="checkbox" value="Next.js"> Next Js</label>
-                <label><input type="checkbox" name="checkbox" value="React.js"> React Js</label>
-                <label><input type="checkbox" name="checkbox" value="TypeScript"> TypeScript</label>
+                <label><input type="checkbox" name="technologies" value="Node.js"> Node Js</label>
+                <label><input type="checkbox" name="technologies" value="Next.js"> Next Js</label>
+                <label><input type="checkbox" name="technologies" value="React.js"> React Js</label>
+                <label><input type="checkbox" name="technologies" value="TypeScript"> TypeScript</label>
               </div>
             </div>
             <div class="form-group">
@@ -50,10 +50,10 @@
               <p>Upload Image</p>
               </label>
               <div class="upload-button">
-              <input name="uploadImage" type="file" accept="image/*" required>
+              <input name="image" type="file" accept="image/*" required>
                 </div>
             </div>
-            <button type="submit" name="submit-button" class="submit-button" >Confirm</button>
+            <button type="submit" name="submit-button" class="submit-button" >Submit</button>
             </form>
           </div>
         </div>
