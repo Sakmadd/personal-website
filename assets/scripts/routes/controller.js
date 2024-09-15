@@ -153,32 +153,25 @@ function loginView(req,res) {
   res.render('login',{user})
 }
 async function loginPost(req,res) {
-  try {
     const { email, password } = req.body
     const user = await prisma.user.findUnique({where: {email}})
-
     if (!user) {
       req.flash('error', 'Wait!, your email or password is not right ! 🤔');
       return res.redirect("/login");
     }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (isValidPassword) {
-      req.flash('error', 'Wait!, your email or password is not right2! 🤔');
-      return res.redirect("/login");
-    }
-
-    req.session.user = user;  
-
-    req.flash('success', 'Youre successfully logged in! 🙌')
-    res.redirect('/login')
-
-
-  }catch {
-    req.flash("error", "something went wrong i can feel it! 😞");
-    res.redirect("/");
-  }
+    bcrypt.compare(password, user.password, (err,result) => {
+      if (err) {
+        req.flash("error", "something went wrong i can feel it! 😞");
+        res.redirect("/");
+      } else if(result) {
+        req.session.user = user;  
+        req.flash('success', 'Youre successfully logged in! 🙌')
+        res.redirect('/login')
+      }else {
+        req.flash('error', 'Wait!, your email or password is not right2! 🤔');
+        res.redirect("/login");
+      }
+    })
 }
 function logout(req,res) {
   req.session.destroy(err => {

@@ -8,19 +8,18 @@
   <title>Document</title>
 </head>
     <body>
-    {{>logbutton}}
-
+     {{>logbutton}}  
      {{> header}}
 
      {{> navbar}}
-     
+
      <div class="form">
         <div class="form-container">
           <h2>ADD PROJECT</h2>
-          <form name="form-project" method="post" action="/edit-project/{{project.id}}">
+          <form name="form-project" method="post" action="/project/add">
             <div class="form-group">
               <label>Project Name</label>
-              <input name="title" type="text" placeholder="Enter project name" value="{{project.title}}" required>
+              <input name="title" type="text" placeholder="Enter project name" required>
             </div>
             <div class="form-group-inline">
               <div class="form-group">
@@ -34,7 +33,7 @@
             </div>
             <div class="form-group">
               <label>Description</label>
-              <textarea name="description" rows="4" placeholder="Enter project description" required>{{project.description}}</textarea>
+              <textarea name="description" rows="4" placeholder="Enter project description" required></textarea>
             </div>
             <div class="form-group">
               <label>Technologies</label>

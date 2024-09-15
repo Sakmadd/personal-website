@@ -5,13 +5,17 @@ const flash = require('express-flash');
 const hbs = require('hbs');
 
 module.exports = (app) => {
-  app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
+  app.use('/assets', express.static(path.join(__dirname, '..','assets')));
+
   app.set('view engine', 'hbs');
-  app.set('views', path.join(__dirname, '..','views'));
-  hbs.registerPartials(path.join(__dirname, '..', 'views', 'partials'));
+  app.set('views', path.join(__dirname, '..', 'assets' ,'views'));
+  hbs.registerPartials(path.join(__dirname, '..','assets', 'views', 'partials'));
+
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+
   app.use(flash());
+
   app.use(
     session({
       name: "user-session",
@@ -23,9 +27,11 @@ module.exports = (app) => {
       },
     })
   );
+
   hbs.registerHelper('not', function(value) {
     return !value;
   });
+
   hbs.registerHelper('includes', function(array, value) {
     return array.includes(value);
   });

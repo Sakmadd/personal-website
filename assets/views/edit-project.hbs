@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
-  <link rel="stylesheet" href="../assets/styles/custom-style.css">
+  <link rel="stylesheet" href="../../assets/styles/custom-style.css">
   <title>Document</title>
 </head>
     <body>
-     {{>logbutton}}  
+    {{>logbutton}}
+
      {{> header}}
 
      {{> navbar}}
-
+     
      <div class="form">
         <div class="form-container">
-          <h2>ADD PROJECT</h2>
-          <form name="form-project" method="post" action="/add-project">
+          <h2>EDIT PROJECT</h2>
+          <form name="form-project" method="post" action="/project/edit/{{project.id}}">
             <div class="form-group">
               <label>Project Name</label>
-              <input name="title" type="text" placeholder="Enter project name" required>
+              <input name="title" type="text" placeholder="Enter project name" value="{{project.title}}" required>
             </div>
             <div class="form-group-inline">
               <div class="form-group">
@@ -33,7 +34,7 @@
             </div>
             <div class="form-group">
               <label>Description</label>
-              <textarea name="description" rows="4" placeholder="Enter project description" required></textarea>
+              <textarea name="description" rows="4" placeholder="Enter project description" required>{{project.description}}</textarea>
             </div>
             <div class="form-group">
               <label>Technologies</label>
@@ -62,6 +63,6 @@
 
 
     </body>
-<script src="/assets/scripts/utils/script.js"></script>
+<script src="/assets/scripts/utils/utils.js"></script>
 <script src="/assets/scripts/utils/navbar.js"></script>
 </html>
