@@ -8,6 +8,7 @@
   <title>Document</title>
 </head>
     <body>
+      
     {{>logbutton}}
 
      {{> header}}
@@ -25,11 +26,11 @@
             <div class="form-group-inline">
               <div class="form-group">
                 <label>Start Date</label>
-                <input name="start_date" type="date" required>
+                <input name="start_date" type="date" value="{{project.start_date}}" required>
                 </div>
                 <div class="form-group">
                 <label>End Date</label>
-                <input name="end_date" type="date" required>
+                <input name="end_date" type="date" value="{{project.end_date}}" required>
             </div>
             </div>
             <div class="form-group">
