@@ -1,4 +1,4 @@
- const calculateProjectDuration = (startDate, endDate) => {
+const calculateProjectDuration = (startDate, endDate) => {
   
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -40,6 +40,15 @@ function capitalizedWords(str) {
     })
     .join(' ');    
 }
+function convertIsoToDate(start_date, end_date) {
+  let date = {}
+  const startdate = new Date(start_date); 
+  const endDate = new Date(end_date); 
+  const formattedStartDate = startdate.toISOString().split('T')[0];
+  const formattedEndDate = endDate.toISOString().split('T')[0];
+  date.start_date = formattedStartDate
+  date.end_date = formattedEndDate
+  return date
+}
 
-
-module.exports = { calculateProjectDuration, capitalizedWords }
+module.exports = { calculateProjectDuration, capitalizedWords, convertIsoToDate }
