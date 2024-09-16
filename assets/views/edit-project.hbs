@@ -18,7 +18,7 @@
      <div class="form">
         <div class="form-container">
           <h2>EDIT PROJECT</h2>
-          <form name="form-project" method="post" action="/project/edit/{{project.id}}">
+          <form name="form-project" method="post" action="/project/edit/{{project.id}}" enctype="multipart/form-data">
             <div class="form-group">
               <label>Project Name</label>
               <input name="title" type="text" placeholder="Enter project name" value="{{project.title}}" required>

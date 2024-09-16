@@ -4,14 +4,10 @@ const session = require("express-session");
 const flash = require('express-flash');
 const hbs = require('hbs');
 const multer = require('multer')
-const storage = multer.diskStorage({
-  filename : function(req,file,cb){
-    cb(null, file.originalname)
-  }
-})
-const upload = multer.diskStorage({ storage })
+
 
 module.exports = (app) => {
+
   app.use('/assets', express.static(path.join(__dirname, '..','assets')));
 
   app.set('view engine', 'hbs');
@@ -45,4 +41,4 @@ module.exports = (app) => {
   hbs.registerHelper('techIncludes', function(array, value) {
     return array && array.includes(value);
   });
-  };
+};
