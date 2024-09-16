@@ -8,7 +8,7 @@
   <title>Document</title>
 </head>
     <body>
-      
+
     {{>logbutton}}
 
      {{> header}}
@@ -40,10 +40,10 @@
             <div class="form-group">
               <label>Technologies</label>
               <div class="checkbox-group">
-                <label><input type="checkbox" name="technologies" value="Node.js"> Node Js</label>
-                <label><input type="checkbox" name="technologies" value="Next.js"> Next Js</label>
-                <label><input type="checkbox" name="technologies" value="React.js"> React Js</label>
-                <label><input type="checkbox" name="technologies" value="TypeScript"> TypeScript</label>
+                <label><input type="checkbox" name="technologies" value="Node.js" {{#if (techIncludes project.technologies "Node.js")}}checked{{/if}}> Node.js</label>
+                <label><input type="checkbox" name="technologies" value="Next.js" {{#if (techIncludes project.technologies "Next.js")}}checked{{/if}}> Next.js</label>
+                <label><input type="checkbox" name="technologies" value="React.js" {{#if (techIncludes project.technologies "React.js")}}checked{{/if}}> React.js</label>
+                <label><input type="checkbox" name="technologies" value="TypeScript" {{#if (techIncludes project.technologies "TypeScript")}}checked{{/if}}> TypeScript</label>
               </div>
             </div>
             <div class="form-group">

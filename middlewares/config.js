@@ -35,4 +35,8 @@ module.exports = (app) => {
   hbs.registerHelper('includes', function(array, value) {
     return array.includes(value);
   });
-};
+  hbs.registerHelper('techIncludes', function(array, value) {
+    return array && array.includes(value);
+  });
+  };
+
