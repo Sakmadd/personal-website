@@ -7,23 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 model Project {
-  id Int @id @default(autoincrement())
-  title String   @db.VarChar(255) 
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
   description String   @db.Text
   technologies String[] @db.Text
-  start_date String @db.VarChar(255)
-  end_date String @db.VarChar(255)
-  image String @db.VarChar(255)
+  start_date  String   @db.VarChar(255)
+  end_date    String   @db.VarChar(255)
+  image       String   @db.VarChar(255)
+  user_id     Int      
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@index([title]) 
+  @@index([title])
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(255)
-  email String @db.VarChar(255) @unique
-  password String @db.VarChar(255)
-  created_at DateTime @default(now())
-  
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  email      String    @db.VarChar(255) @unique
+  password   String    @db.VarChar(255)
+  created_at DateTime  @default(now())
+  projects   Project[] 
+
   @@index([name])
 }
+

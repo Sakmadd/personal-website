@@ -1,3 +1,40 @@
+const initialDummyProjects = 
+  [
+    {
+      "id": 1,
+      "title": "Project Management Tool",
+      "description": "A project management tool designed to help teams collaborate, track tasks, and manage deadlines effectively. Features include task assignment, project timelines, and team communication.",
+      "technologies": ["React.js", "Node.js", "TypeScripts"],
+      "start_date": "2024-05-01",
+      "end_date": "2024-07-15",
+      "image": "/assets/images/project1.jpg",
+      "user_id": 1,
+      "duration": "2 months 15 days"
+    },
+    {
+      "id": 2,
+      "title": "Personal Portfolio",
+      "description": "A personal portfolio website showcasing individual projects, skills, and professional experience. Includes a blog section and contact form.",
+      "technologies": ["Next.js", "TypeScript", "Node.js"],
+      "start_date": "2024-03-10",
+      "end_date": "2024-05-01",
+      "image": "/assets/images/project2.jpg",
+      "user_id": 2,
+      "duration": "1 month 22 days"
+    },
+    {
+      "id": 3,
+      "title": "E-Commerce Dashboard",
+      "description": "An e-commerce dashboard for managing online stores, including inventory tracking, order management, and customer analytics.",
+      "technologies": ["React.js", "Next.js", "TypeScript", "Node.js"],
+      "start_date": "2024-06-01",
+      "end_date": "2024-09-01",
+      "image": "/assets/images/project3.jpg",
+      "user_id": 3,
+      "duration": "3 months"
+    }
+  ]
+
 const calculateProjectDuration = (startDate, endDate) => {
   
   const start = new Date(startDate);
@@ -27,6 +64,8 @@ const calculateProjectDuration = (startDate, endDate) => {
   }
   if (days > 0) {
     duration += `${days} day${days > 1 ? 's' : ''}`;
+  }if(startDate === endDate) {
+    duration += 'Instant'
   }
 
   return duration.trim();
@@ -51,4 +90,4 @@ function convertIsoToDate(start_date, end_date) {
   return date
 }
 
-module.exports = { calculateProjectDuration, capitalizedWords, convertIsoToDate }
+module.exports = { calculateProjectDuration, capitalizedWords, convertIsoToDate, initialDummyProjects }

@@ -1,5 +1,5 @@
 const { PrismaClient } = require('@prisma/client')
-const { calculateProjectDuration, capitalizedWords, convertIsoToDate } = require('../utils/utils')
+const { calculateProjectDuration, capitalizedWords, convertIsoToDate, initialDummyProjects } = require('../utils/utils')
 const bcrypt = require('bcrypt');
 const prisma = new PrismaClient()
 const cloudinary = require('cloudinary').v2
@@ -12,31 +12,59 @@ cloudinary.config({
 })
 
 async function home(req, res) {
+  let dataProjects = []
  try {
   const user = req.session.user
-  const dataProjects = await prisma.project.findMany({})
-  dataProjects.forEach(project => {
-    const duration = calculateProjectDuration(project.start_date, project.end_date)
-    project.duration = duration 
-  })
-  res.render('index', { 
-    dataProjects, 
-    user
-  });
+  if(!user){
+    dataProjects = initialDummyProjects
+    res.render('index', { 
+      dataProjects, 
+      user
+    });
+  }
+  else {
+    dataProjects = await prisma.project.findMany({
+      where : {
+        user_id : user.id
+      }
+    })
+    dataProjects.forEach(project => {
+      const duration = calculateProjectDuration(project.start_date, project.end_date)
+  
+      project.duration = duration 
+    })
+    res.render('index', { 
+      dataProjects, 
+      user
+    });
+  }
+
+
  } catch (err) {
  }
 }
 function contact(req, res) {
-  const user = req.session.user
-  res.render('contact',{user});
+  res.render('contact');
+}
+function testimonialView(req, res) {
+  res.render('testimonial',);
+}
+function addProjectView(req, res) {
+  res.render('add-project');
 }
 async function addProjectPost(req, res) {
-  let { title, start_date, end_date, description, technologies} = req.body;
-  const filePath = req.file.path
-  if (!Array.isArray(technologies)) {
-    technologies = [technologies];
+  if(req.session.user === undefined){ 
+    req.flash("error", "Sorry, you have to login before adding projects! 😣"); 
+    return res.redirect('/project/add')
   }
 
+  const { id } = req.session.user
+
+
+  let { title, start_date, end_date, description, technologies} = req.body;
+  const filePath = req.file.path
+
+  if (!Array.isArray(technologies)) {technologies = [technologies];}
   try {
     cloudinary.uploader.upload(filePath, async (error, result) => {
       if (error) {
@@ -49,24 +77,16 @@ async function addProjectPost(req, res) {
           start_date,
           end_date,
           technologies,
-          image: result.secure_url
+          image: result.secure_url,
+          user_id: id
         }
       })
-    
     });    
     res.redirect('/home');
   } catch (error) {
     res.status(500).send('Failed to save image URL.');
   } finally{
   }
-}
-function testimonialView(req, res) {
-  const user = req.session.user
-  res.render('testimonial',{user});
-}
-function addProjectView(req, res) {
-  const user = req.session.user
-  res.render('add-project', { user });
 }
 async function editProjectView(req, res) {
   try {
