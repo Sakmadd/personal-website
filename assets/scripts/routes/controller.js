@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const prisma = new PrismaClient()
 const cloudinary = require('cloudinary').v2
 const fs = require('fs')
+const streamifier = require('streamifier')
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -53,8 +54,6 @@ function addProjectView(req, res) {
   res.render('add-project');
 }
 async function addProjectPost(req, res) {
-  const filePath = req.file.path
-
   if(req.session.user === undefined){ 
     req.flash("error", "Sorry, you have to login before adding projects! 😣"); 
     return res.redirect('/project/add')
@@ -65,32 +64,31 @@ async function addProjectPost(req, res) {
 
   if (!Array.isArray(technologies)) {technologies = [technologies];}
   try {
-    cloudinary.uploader.upload(filePath, async (error, result) => {
-      if (error) {
-        return res.status(500).send('Upload to Cloudinary failed.');
-      }
-      try {
-        await prisma.project.create({
-          data: {
-            title,
-            start_date,
-            end_date,
-            description,
-            technologies,
-            image: result.secure_url,
-            user_id: id
-          },
-        });
-        fs.unlinkSync(filePath);
-        res.redirect('/home');
-      } catch (error) {
-        return res.status(500).send('Failed to update project.');
-      }
-    });  
+    const fileBuffer = req.file.buffer;
+
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream((error, result) => {
+        if (error) return reject(error);
+        resolve(result);
+      });
+      streamifier.createReadStream(fileBuffer).pipe(uploadStream); 
+    });
+
+    await prisma.project.create({
+      data: {
+        title,
+        start_date,
+        end_date,
+        description,
+        technologies,
+        image: result.secure_url,
+        user_id: id
+      },
+    });
+    res.redirect('/home');
   } catch (error) {
     res.status(500).send('Failed to save image URL.');
-  } finally{
-  }
+  } 
 }
 async function editProjectView(req, res) {
   try {
@@ -116,7 +114,6 @@ async function editProjectView(req, res) {
 }
 async function editProjectPost(req, res) {
   const id = parseInt(req.params.id, 10);
-  const filePath = req.file.path;
   let { title, start_date, end_date, description, technologies } = req.body;
 
   if (!Array.isArray(technologies)) {
@@ -132,28 +129,43 @@ async function editProjectPost(req, res) {
     if (!project) {
       return res.status(404).json({ error: 'Project not found' });
     }
-    cloudinary.uploader.upload(filePath, async (error, result) => {
-      if (error) {
-        return res.status(500).send('Upload to Cloudinary failed.');
-      }
-      try {
-        await prisma.project.update({
-          where: { id },
-          data: {
-            title,
-            start_date,
-            end_date,
-            description,
-            technologies,
-            image: result.secure_url,
-          },
+
+    if (req.file) {
+      const fileBuffer = req.file.buffer;
+
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream((error, result) => {
+          if (error) return reject(error);
+          resolve(result);
         });
-        fs.unlinkSync(filePath);
-        res.redirect('/home');
-      } catch (error) {
-        return res.status(500).send('Failed to update project.');
-      }
-    });
+        streamifier.createReadStream(fileBuffer).pipe(uploadStream); // Unggah buffer
+      });
+
+      await prisma.project.update({
+        where: { id },
+        data: {
+          title,
+          start_date,
+          end_date,
+          description,
+          technologies,
+          image: result.secure_url, 
+        },
+      });
+    } else {
+      await prisma.project.update({
+        where: { id },
+        data: {
+          title,
+          start_date,
+          end_date,
+          description,
+          technologies,
+        },
+      });
+    }
+
+    res.redirect('/home');
   } catch (error) {
     return res.status(500).send('Internal server error.');
   }

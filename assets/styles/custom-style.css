@@ -475,6 +475,11 @@ height: 100vh;
 .submit-button:hover {
   background-color: #333;
 }
+.project-image {
+  border-radius: 5%;
+  max-width: 50%;
+  height: auto;
+}
 
 
 /* DETAIL PROJECT */
