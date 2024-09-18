@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+  <link rel="stylesheet" href="../assets/styles/custom-style.css">
+  <title>Document</title>
+</head>
+	<body>
+
+		{{>logbutton}}
+		{{> header}}
+		{{> navbar}}
+
+    <main>
+      <h1 style="text-align: center; padding: 100px;">Im Sorry, Couldn't Find Any Page 😞</h1>
+    </main>
+
+		{{> footer}}
+		
+	</body>
+	<script>function detailProject(id) {window.location.href = `/project/detail/${id}`}</script>
+	<script src="/assets/scripts/utils/navbar.js"></script>
+</html>

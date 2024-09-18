@@ -45,13 +45,16 @@ async function home(req, res) {
  }
 }
 function contact(req, res) {
-  res.render('contact');
+  const user = req.session.user
+  res.render('contact', {user});
 }
 function testimonialView(req, res) {
-  res.render('testimonial',);
+  const user = req.session.user
+  res.render('testimonial', {user});
 }
 function addProjectView(req, res) {
-  res.render('add-project');
+  const user = req.session.user
+  res.render('add-project', {user});
 }
 async function addProjectPost(req, res) {
   if(req.session.user === undefined){ 
@@ -183,10 +186,13 @@ async function deleteProject(req, res) {
 async function detailProject(req, res) {
   const id = parseInt(req.params.id, 10);
   const dataProject = await prisma.project.findUnique({where: {id}})
+  const user = await prisma.user.findUnique({where: {id : dataProject.user_id}})
   const duration = calculateProjectDuration(dataProject.start_date, dataProject.end_date)
+  user.name = capitalizedWords(user.name)
+  console.log(user)
   dataProject.duration = duration  
   if (dataProject) {
-    res.render('detail-project', { project : dataProject });
+    res.render('detail-project', { project : dataProject , user});
   } else {
     res.status(404).send('Project not found');
   }
@@ -226,11 +232,15 @@ function loginView(req,res) {
 }
 async function loginPost(req,res) {
     const { email, password } = req.body
-    const user = await prisma.user.findUnique({where: {email}})
+    let user = {}
+
+    user = await prisma.user.findUnique({where: {email}})
+
     if (!user) {
       req.flash('error', 'Wait!, your email or password is not right ! 🤔');
       return res.redirect("/login");
     }
+
     bcrypt.compare(password, user.password, (err,result) => {
       if (err) {
         req.flash("error", "something went wrong i can feel it! 😞");
