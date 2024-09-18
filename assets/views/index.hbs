@@ -31,7 +31,7 @@
 		</div>
 		</div>
 		<div class="project">
-			<h1 class="main-title">My Projects</h1>
+			<h1 class="main-title">{{#if user}} {{user.name}}'s Projects {{else}} My Projects{{/if}} </h1>
 			<div class="project-cards-container">
 				{{#each dataProjects}}
 					<div class="project-card" onclick="detailProject('{{id}}')">		

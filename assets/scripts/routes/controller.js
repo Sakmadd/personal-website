@@ -8,7 +8,7 @@ const fs = require('fs')
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
+  api_secret: process.env.API_SECRET    
 })
 
 async function home(req, res) {
@@ -69,19 +69,24 @@ async function addProjectPost(req, res) {
       if (error) {
         return res.status(500).send('Upload to Cloudinary failed.');
       }
-      await prisma.project.create({
-        data:{
-          title,
-          description,
-          start_date,
-          end_date,
-          technologies,
-          image: result.secure_url,
-          user_id: id
-        }
-      })
-    });    
-    res.redirect('/home');
+      try {
+        await prisma.project.create({
+          data: {
+            title,
+            start_date,
+            end_date,
+            description,
+            technologies,
+            image: result.secure_url,
+            user_id: id
+          },
+        });
+        fs.unlinkSync(filePath);
+        res.redirect('/home');
+      } catch (error) {
+        return res.status(500).send('Failed to update project.');
+      }
+    });  
   } catch (error) {
     res.status(500).send('Failed to save image URL.');
   } finally{
@@ -155,7 +160,7 @@ async function editProjectPost(req, res) {
 }
 async function deleteProject(req, res) {
   const id = parseInt(req.params.id, 10);
-  const user = await prisma.project.findUnique({where: {id,}})
+  const user = await prisma.project.findUnique({where: {id}})
   if (user) {
     await prisma.project.delete({where: {id,},})
     res.redirect('/home');

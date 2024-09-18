@@ -17,11 +17,11 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use(flash());
+  app.use(flash()); 
 
   app.use(
     session({
-      name: "user-session",
+      name: "user",
       secret: "ewVsqWOyeb",
       resave: false,
       saveUninitialized: true,
