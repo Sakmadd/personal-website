@@ -8,6 +8,7 @@ const hbs = require('hbs');
 module.exports = (app) => {
 
   app.use('/assets', express.static(path.join(__dirname, '..','assets')));
+  app.use('/temp', express.static(path.join(__dirname, '..','temp')));
 
   app.set('view engine', 'hbs');
   app.set('views', path.join(__dirname, '..', 'assets' ,'views'));
