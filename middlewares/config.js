@@ -3,7 +3,6 @@ const path = require('path');
 const session = require("express-session");
 const flash = require('express-flash');
 const hbs = require('hbs');
-const multer = require('multer')
 
 
 module.exports = (app) => {

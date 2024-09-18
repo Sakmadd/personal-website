@@ -3,7 +3,6 @@ const router = express.Router();
 const { home, contact, addProjectView, detailProject, addProjectPost, deleteProject, editProjectView, editProject, registerPost, loginView, loginPost, registerView, testimonialView, logout, editProjectPost } = require('./controller');
 const upload = require('../../../middlewares/multer')
 
-
 router.get('/',home);
 router.get('/home', home);
 router.get('/contact', contact);

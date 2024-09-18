@@ -54,14 +54,13 @@ function addProjectView(req, res) {
 }
 async function addProjectPost(req, res) {
   const filePath = req.file.path
+
   if(req.session.user === undefined){ 
     req.flash("error", "Sorry, you have to login before adding projects! 😣"); 
     return res.redirect('/project/add')
   }
-  
+
   const { id } = req.session.user
-
-
   let { title, start_date, end_date, description, technologies} = req.body;
 
   if (!Array.isArray(technologies)) {technologies = [technologies];}

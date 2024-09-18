@@ -7,7 +7,7 @@ const initialDummyProjects =
       "technologies": ["React.js", "Node.js", "TypeScripts"],
       "start_date": "2024-05-01",
       "end_date": "2024-07-15",
-      "image": "/temp/project1.jpg",
+      "image": "/assets/images/project1.jpg",
       "user_id": 1,
       "duration": "2 months 15 days"
     },
@@ -18,7 +18,7 @@ const initialDummyProjects =
       "technologies": ["Next.js", "TypeScript", "Node.js"],
       "start_date": "2024-03-10",
       "end_date": "2024-05-01",
-      "image": "/temp/project2.jpg",
+      "image": "/assets/images/project2.jpg",
       "user_id": 2,
       "duration": "1 month 22 days"
     },
@@ -29,7 +29,7 @@ const initialDummyProjects =
       "technologies": ["React.js", "Next.js", "TypeScript", "Node.js"],
       "start_date": "2024-06-01",
       "end_date": "2024-09-01",
-      "image": "/temp/project3.jpg",
+      "image": "/assets/images/project3.jpg",
       "user_id": 3,
       "duration": "3 months"
     }
