@@ -3,6 +3,7 @@ const path = require('path');
 const session = require("express-session");
 const flash = require('express-flash');
 const hbs = require('hbs');
+const { PrismaClient } = require('@prisma/client');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 
 
