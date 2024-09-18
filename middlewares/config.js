@@ -3,6 +3,11 @@ const path = require('path');
 const session = require("express-session");
 const flash = require('express-flash');
 const hbs = require('hbs');
+const RedisStore = require("connect-redis")(session);
+const redis = require("redis");
+const redisClient = redis.createClient({
+  legacyMode: true,
+});
 
 
 module.exports = (app) => {
@@ -20,12 +25,13 @@ module.exports = (app) => {
 
   app.use(
     session({
-      name: "user",
+      store: new RedisStore({ client: redisClient }),
       secret: "ewVsqWOyeb",
       resave: false,
       saveUninitialized: true,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 hari
+        domain: "ahmad-pi.vercel.com",
+        maxAge: 1000 * 60 * 60 * 24, 
       },
     })
   );
