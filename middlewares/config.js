@@ -3,6 +3,7 @@ const path = require('path');
 const session = require("express-session");
 const flash = require('express-flash');
 const hbs = require('hbs');
+const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 
 
 module.exports = (app) => {
@@ -20,14 +21,21 @@ module.exports = (app) => {
 
   app.use(
     session({
-      name: "user-session",
-      secret: "ewVsqWOyeb",
-      resave: false,
-      saveUninitialized: true,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 hari
-      },
-    })
+        maxAge: 1000 * 60 * 60 * 24
+       },
+       secret: 'a santa at nasa',
+       resave: true,
+       saveUninitialized: true,
+       store: new PrismaSessionStore(
+         new PrismaClient(),
+         {
+           checkPeriod: 2 * 60 * 1000,  
+           dbRecordIdIsSessionId: true,
+           dbRecordIdFunction: undefined,
+         }
+       )
+     })
   );
 
   hbs.registerHelper('not', function(value) {
