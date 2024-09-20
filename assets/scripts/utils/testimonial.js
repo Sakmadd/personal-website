@@ -32,8 +32,6 @@ async function fetchTestimonials() {
       const response = await fetch('https://api.npoint.io/ef4a1292c6548975904a');
       const data = await response.json();
 
-      console.log('Fetched data:', data);
-
       return data.map(item => new Testimony(item.image, item.rating, item.description, item.name));
   } catch (error) {
       console.error('Error fetching testimonials:', error);

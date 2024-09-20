@@ -37,7 +37,6 @@ const submitEvent = () => {
     subject: document.getElementById('subject').value,
     message: document.getElementById('message').value,
   }
-  console.log(data)
   dataChecker(data)
   const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`${data.message}`)}`;
   window.location.href = mailtoLink;

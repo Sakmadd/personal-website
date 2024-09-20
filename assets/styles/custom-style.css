@@ -28,7 +28,7 @@ main {
 }
 .bacground-header{
   background-image: url(../images/background.jpg);
-  height: 55vh;
+  height: 65vh;
   background-position: 0 -320px;
   filter: grayscale(1) opacity(.2);
   width: 100%;
