@@ -189,7 +189,6 @@ async function detailProject(req, res) {
   const user = await prisma.user.findUnique({where: {id : dataProject.user_id}})
   const duration = calculateProjectDuration(dataProject.start_date, dataProject.end_date)
   user.name = capitalizedWords(user.name)
-  console.log(user)
   dataProject.duration = duration  
   if (dataProject) {
     res.render('detail-project', { project : dataProject , user});
