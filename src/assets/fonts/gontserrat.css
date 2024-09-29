@@ -1,0 +1,65 @@
+@font-face {
+  font-family: "Gontserrat-Regular";
+  src: url("../fonts/Gontserrat-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gontserrat-Medium";
+  src: url("../fonts/Gontserrat-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gontserrat-SemiBold";
+  src: url("../fonts/Gontserrat-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gontserrat-Bold";
+  src: url("../fonts/Gontserrat-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gontserrat-ExtraBold";
+  src: url("../fonts/Gontserrat-ExtraBold.ttf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gontserrat-Black";
+  src: url("../fonts/Gontserrat-Black.ttf");
+  font-weight: 900;
+  font-style: normal;
+}
+
+.gontserrat {
+  font-family: "Gontserrat-Regular";
+}
+
+.gontserrat-medium {
+  font-family: "Gontserrat-Medium";
+}
+
+.gontserrat-semibold {
+  font-family: "Gontserrat-SemiBold";
+}
+
+.gontserrat-bold {
+  font-family: "Gontserrat-Bold";
+}
+
+.gontserrat-extrabold {
+  font-family: "Gontserrat-ExtraBold";
+}
+
+.gontserrat-black {
+  font-family: "Gontserrat-Black";
+}
